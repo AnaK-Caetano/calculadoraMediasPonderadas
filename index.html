@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de notas</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <section class="body-container">
+        <h1>Calculadora de notas - Ilustração vetorial</h1>
+        <fieldset class="form-container">
+            <form action="apurar.html" method="post" onsubmit="return votacao()">
+                <div class="nome-aluno">
+                    <label for="nome">Nome do aluno</label>
+                    <input type="text" name="nome" minlength="12" required autocomplete="off">
+                </div>
+                <div class="select-projeto">
+                    <label for="projeto">Escolha seu projeto fotográfico </label>
+                    <select name="projeto" id="tipoProjeto">
+                        <option value="interface">Interface</option>
+                        <option value="fotografia">Edição de fotografia</option>
+                        <option value="composicao">Composição</option>
+                        <option value="colagem">Colagem</option>
+                    </select>
+                </div>
+                <button type="submit" onclick="transferirDados()"> Começar Apuração </button>
+            </form>
+        </fieldset>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
