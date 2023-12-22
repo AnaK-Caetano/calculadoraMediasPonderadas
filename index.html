@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de notas</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 
 </head>
 <body>
@@ -25,11 +26,10 @@
                         <option value="colagem">Colagem</option>
                     </select>
                 </div>
-                <button type="submit" id="comecarApuracaoBtn" onclick="transferirDados(event)"> Começar Apuração </button>
+                <button type="submit" id="comecarApuracaoBtn" onclick="transferirDados(event)" disabled class="login-button"> Começar Apuração </button>
             </form>
         </fieldset>
     </section>
 
-    <script src="script.js"></script>
 </body>
 </html>

@@ -62,7 +62,7 @@ select {
     font-weight: 600;
 }
 
-button {
+.login-button {
     padding: 10px;
     background-color: #4caf50;
     color: #fff;
@@ -70,8 +70,16 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.login-button::hover {
     background-color: #45a049;
+}
+
+.login-button:disabled {
+    color: #e4e5e7;  
+    background-color: #4caf50;
+
+    filter: grayscale(0.8);
+    cursor: auto;
 }
 
 @media screen and (max-width: 600px) {
