@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;800&display=swap');
+
 
 *{
     margin: 0;
@@ -27,6 +29,34 @@ body{
     padding: 1rem;
 }
 
+.info-aluno-container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+}
+
+.info-aluno-titulo,
+.info-aluno-conteudo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem; 
+}
+
+.info-aluno-container p,
+.info-aluno-container span {
+    font-family: 'Roboto Slab', serif;
+}
+
+
+.info-aluno-titulo p {
+    font-weight: bolder;
+}
+
+.info-aluno-titulo p,
+.info-aluno-conteudo span {
+    margin: 0;
+}
+
 .formulario-h1 {
     margin: 1rem;
     text-align: center;
@@ -49,6 +79,7 @@ body{
 
 .input-box label {
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .input-box input {

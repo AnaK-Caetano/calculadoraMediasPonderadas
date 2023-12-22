@@ -5,12 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apuração</title>
     <link rel="stylesheet" href="apurar.css">
+    <script defer src="script.js"></script>
+    
 </head>
 <body>
     <section class="formulario-section">
-        <div id="resultado" class="body-container">
-            <p>Nome do Aluno: <span id="nomeResultado"></span></p>
-            <p>Tipo de Projeto Escolhido: <span id="tipoProjetoResultado"></span></p>
+        <div id="resultado" class="info-aluno-container">
+            <div class="info-aluno-titulo">
+                <p>Nome do Aluno</p>
+                <p>Tipo de projeto escolhido</p>
+            </div>
+            <div class="info-aluno-conteudo">
+                <span id="nomeResultado"></span>
+                <span id="tipoProjetoSelecionado"></span>
+            </div>
         </div>
 
         <h1 class="formulario-h1">Digite uma nota de 0 a 5</h1>
@@ -18,19 +26,19 @@
         <fieldset class="formulario-fieldset">
             <form id="avaliacaoForm" class="formulario-form">
                 <div class="input-box">
-                    <label for="tema"><strong>Temática bem definida</strong></label>
+                    <label for="tema">Temática bem definida</label>
                     <input type="number" name="tema" id="tema" required autocomplete="off" min="0" max="5">
                 </div>
                 <div class="input-box">
-                    <label for="criatividade"><strong>Criatividade/originalidade</strong></label>
+                    <label for="criatividade">Criatividade/originalidade</label>
                     <input type="number" name="criatividade" id="criatividade" required autocomplete="off" min="0" max="5">
                 </div>
                 <div class="input-box">
-                    <label for="tecnica"><strong>Aspectos técnicos</strong><br> (ponto focal/qualidade de resolução)</label>
+                    <label for="tecnica">Aspectos técnicos<br>(ponto focal/qualidade de resolução)</label>
                     <input type="number" name="tecnica" id="tecnica" required autocomplete="off" min="0" max="5">
                 </div>
                 <div class="input-box">
-                    <label for="design"><strong>Aspectos de design</strong> <br> (relação figura x fundo/ texto x fundo/hierarquia de informação/composição cromática)</strong></label>
+                    <label for="design">Aspectos de design<br>(relação figura x fundo/ texto x fundo/hierarquia de informação/composição cromática)</strong></label>
                     <input type="number" name="design" id="design" required autocomplete="off" min="0" max="5">
                 </div>
                 <div class="select-atraso">
@@ -50,7 +58,7 @@
             <button type="button" class="button-primary" onclick="calcularMediaPonderada('interface')">Finalizar apuração</button>
         </div>
     </section>
-    <script src="script.js"></script>
+    
 </body>
 
 </html>
