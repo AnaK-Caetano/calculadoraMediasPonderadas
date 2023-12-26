@@ -2,17 +2,17 @@
 let tipoProjeto;
 
 function votacao() {
-    tipoProjeto = document.getElementById("tipoProjeto").value;
+    tipoProjeto = document.querySelector("#tipoProjeto").value;
     
     switch (tipoProjeto) {
         case "fotografia":
         case "composicao":
         case "colagem":
         case "interface":
-            alert(`O Projeto selecionado foi ${tipoProjeto}`);
+            console.log(`O Projeto selecionado foi ${tipoProjeto}`);
             break;
         case "":
-            alert("Valor inválido");
+            console.log("Por favor, selecione um tipo de projeto");
             break;
         default:
             alert("Tipo de projeto não reconhecido");
@@ -22,16 +22,12 @@ function votacao() {
         // Impedir o envio padrão do formulário
         return false;
     }
+    const submitForm = document.querySelector('.login-form');
 
-
-// Capturar nome e tipo de projeto do aluno avaliado
-const submitForm = document.querySelector('.login-form');
-
-
-
+// validação dos nomes de campo e tipo de projeto escolhido
 document.addEventListener('DOMContentLoaded', function () {
-    const input = document.getElementById('nome');
-    const button = document.getElementById('comecarApuracaoBtn');
+    const input = document.querySelector("#nome");
+    const button = document.querySelector("#comecarApuracaoBtn");
 
     // Verifica se os elementos existem antes de adicionar os ouvintes de evento
     if (input && button) {
@@ -43,12 +39,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             button.setAttribute('disabled', '');
         }
-
         input.addEventListener('input', validateInput);
     } 
 });
 
-
+//Capturar nome e tipo de projeto
 function transferirDados(event) {
     event.preventDefault();
     
@@ -57,23 +52,74 @@ function transferirDados(event) {
 
     localStorage.setItem('nomeAluno', nomeAluno);
     localStorage.setItem('tipoProjeto', tipoProjetoSelecionado);
+    console.log('Valor do tipoProjeto no localStorage:', tipoProjetoSelecionado);
+
     window.location = "apurar.html";
 };
 
-const spanNome = document.getElementById('nomeResultado');
-const spanTipoProjeto = document.getElementById('tipoProjetoSelecionado');
+// Variáveis globais para armazenar os dados
+const nomeCadastrado = localStorage.getItem('nomeAluno');
+const projetoCadastrado = localStorage.getItem('tipoProjeto');
 
 document.addEventListener('DOMContentLoaded', function() {
-    const nomeArmazenado = localStorage.getItem('nomeAluno');
-    const tipoProjetoArmazenado = localStorage.getItem('tipoProjeto');
-    // alert(`Estudante ${nomeArmazenado} selecionou o projeto ${tipoProjetoArmazenado}`);
-
-    // Verificar se os valores existem antes de exibi-los
-    if (nomeArmazenado && tipoProjetoArmazenado) {
-        spanNome.innerText = nomeArmazenado;
-        spanTipoProjeto.innerText = tipoProjetoArmazenado;
+    // Verificar se os valores existem antes de modificar o HTML
+    if (nomeCadastrado && projetoCadastrado) {
+        document.getElementById("nomeCadastrado").innerText = nomeCadastrado;
+        document.getElementById("projetoCadastrado").innerText = projetoCadastrado;
     } 
 });
+
+const resultados = {
+    tematica: 0,
+    criatividade: 0,
+    aspectosTecnicos: 0,
+    aspectosDesign: 0,
+    totalAvaliadores: 0,
+};
+
+const contagemAtrasos = { sim: 0, nao: 0 };
+
+// Função para registrar a avaliação individual
+function registrarAvaliacao() {
+    // Obter as pontuações do formulário
+    let notaIndividualTematica = parseFloat(document.getElementById("tema").value);
+    let notaIndividualCriatividade = parseFloat(document.getElementById("criatividade").value);
+    let notaIndividualAspectosTecnicos = parseFloat(document.getElementById("tecnica").value);
+    let notaIndividualDesign = parseFloat(document.getElementById("design").value);
+
+    // Validar as notas
+    if (
+        isNaN(notaIndividualTematica) || isNaN(notaIndividualCriatividade) ||
+        isNaN(notaIndividualAspectosTecnicos) || isNaN(notaIndividualDesign) ||
+        notaIndividualTematica > 5 || notaIndividualCriatividade > 5 ||
+        notaIndividualAspectosTecnicos > 5 || notaIndividualDesign > 5
+    ) {
+        alert("Por favor, insira notas válidas (cada nota deve ser menor ou igual a 5).");
+        return;
+    }
+
+    // Incrementar os resultados com as pontuações do avaliador atual
+    resultados.tematica += notaIndividualTematica;
+    resultados.criatividade += notaIndividualCriatividade;
+    resultados.aspectosTecnicos += notaIndividualAspectosTecnicos;
+    resultados.aspectosDesign += notaIndividualDesign;
+    resultados.totalAvaliadores++;
+
+    
+    // Inicializa a variável contagemAtrasos
+    const selecaoAtraso = document.getElementById('atraso').value;
+
+    if (selecaoAtraso === "sim") {
+        contagemAtrasos.sim++;
+    } else {
+        contagemAtrasos.nao++;
+    }
+
+    console.log(resultados);
+    console.log(contagemAtrasos);
+    document.getElementById("avaliacaoForm").reset();
+    
+}
 
 // Preparação dos parâmetros de avaliação
 const PESOS = {
@@ -103,21 +149,55 @@ const PESOS = {
     },
 };
 
-const tipoProjetoArmazenado = localStorage.getItem('tipoProjeto');
+//Cálculo das médias
+let mediaTotalPonderada = 0;
 
-if (PESOS.hasOwnProperty(tipoProjetoArmazenado)) {
-    const pesosDoTipoProjeto = PESOS[tipoProjetoArmazenado];
+function calcularMediaPonderada(projetoCadastrado) {
+    
 
-    const pesoTematica = pesosDoTipoProjeto.tematica;
-    const pesoCriatividade = pesosDoTipoProjeto.criatividade;
-    const pesoAspectosTecnicos = pesosDoTipoProjeto.aspectosTecnicos;
-    const pesoAspectosDesign = pesosDoTipoProjeto.aspectosDesign;
+     // Verificar se o tipo do projeto existe nos pesos
+     if (!PESOS.hasOwnProperty(tipoProjetoArmazenado)) {
+        alert("Tipo de projeto inválido.");
+        return;
+    }
 
-    // Use esses pesos conforme necessário na sua lógica
-    // alert('Peso Temática:', pesoTematica);
-    // alert('Peso Criatividade:', pesoCriatividade);
-    // alert('Peso Aspectos Técnicos:', pesoAspectosTecnicos);
-    // alert('Peso Aspectos Design:', pesoAspectosDesign);
-} else {
-    console.error('Tipo de projeto não encontrado em PESOS.');
+    // Calcular a pontuação total ponderada
+    let pontuacaoTotalPonderada =
+        resultados.tematica * PESOS[tipoProjetoArmazenado].tematica +
+        resultados.criatividade * PESOS[tipoProjetoArmazenado].criatividade +
+        resultados.aspectosTecnicos * PESOS[tipoProjetoArmazenado].aspectosTecnicos +
+        resultados.aspectosDesign * PESOS[tipoProjetoArmazenado].aspectosDesign;
+
+    // Calcular a soma dos pesos
+    let somaDosPesos =
+        PESOS[tipoProjetoArmazenado].tematica +
+        PESOS[tipoProjetoArmazenado].criatividade +
+        PESOS[tipoProjetoArmazenado].aspectosTecnicos +
+        PESOS[tipoProjetoArmazenado].aspectosDesign;
+
+    // Calcular a média ponderada total
+    let mediaTotalPonderada = pontuacaoTotalPonderada / (somaDosPesos * resultados.totalAvaliadores);
+
+    exibirResultadosFinais(mediaTotalPonderada);
+    
+    // Verificar se há pelo menos um avaliador
+    if (resultados.totalAvaliadores === 0) {
+        alert("Nenhum avaliador registrou nota ainda.");
+        return;
+    }
 }
+
+function exibirResultadosFinais(mediaTotalPonderada) {
+    let resultadosDiv = document.getElementById("resultadosDiv");
+    resultadosDiv.innerHTML = `<p><strong>Média Total Ponderada: ${mediaTotalPonderada.toFixed(1)}</strong></p>`;
+    resultadosDiv.style.display = "block";
+}
+
+
+
+
+
+// Ação para voltar à página inicial
+document.getElementById("botaoVoltarIndex").addEventListener("click", function() {
+    window.location.href = "index.html";
+});

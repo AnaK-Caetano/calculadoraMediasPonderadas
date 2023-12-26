@@ -16,8 +16,8 @@
                 <p>PROJETO ESCOLHIDO</p>
             </div>
             <div class="info-aluno-conteudo">
-                <span id="nomeResultado"></span>
-                <span id="tipoProjetoSelecionado"></span>
+                <p id="nomeCadastrado"></p>
+                <p id="projetoCadastrado"></p>
             </div>
         </div>
 
@@ -44,9 +44,8 @@
                 <div class="select-atraso">
                     <label for="atraso">O Atraso na entrega deve descontar 0.5 da nota final?</label>
                     <select name="atraso" id="atraso">
-                        <option value="sim">Sim</option>
                         <option value="nao">Não</option>
-                        <option value="nao_se_aplica">Não se aplica</option>
+                        <option value="sim">Sim</option>
                     </select>
                 </div>
                 <button type="button" class="button-primary" onclick="registrarAvaliacao()">Registrar nota individual</button>
@@ -55,7 +54,7 @@
         <div id="resultadosDiv" style="display: none;"></div>
         <div class="button-container">
             <button type="button" class="button-secondary" id="botaoVoltarIndex">Voltar à página inicial</button>
-            <button type="button" class="button-primary" onclick="calcularMediaPonderada('interface')">Finalizar apuração</button>
+            <button type="button" class="button-primary" onclick="calcularMediaPonderada()">Finalizar apuração</button>
         </div>
     </section>
     
