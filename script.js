@@ -53,13 +53,15 @@ function transferirDados(event) {
     localStorage.setItem('nomeAluno', nomeAluno);
     localStorage.setItem('tipoProjeto', tipoProjetoSelecionado);
     console.log('Valor do tipoProjeto no localStorage:', tipoProjetoSelecionado);
-
+    
     window.location = "apurar.html";
 };
 
 // Variáveis globais para armazenar os dados
 const nomeCadastrado = localStorage.getItem('nomeAluno');
 const projetoCadastrado = localStorage.getItem('tipoProjeto');
+// console.log(typeof nomeCadastrado);
+// console.log(typeof projetoCadastrado);
 
 document.addEventListener('DOMContentLoaded', function() {
     // Verificar se os valores existem antes de modificar o HTML
