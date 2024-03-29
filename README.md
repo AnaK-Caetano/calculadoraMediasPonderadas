@@ -1,6 +1,6 @@
 # Calculadora de notas - Avaliação de projetos fotográficos
 
-Calculadora de notas da disciplina de Ilustração Vetorial da Prof. Sandra Chacon para ETE Porto Digital
+Calculadora de notas com médias ponderais para a disciplina de Ilustração Vetorial da Prof. Sandra Chacon para ETE Porto Digital em 2023.2. 
 
 
 ## Autora
